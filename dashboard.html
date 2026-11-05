@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Talyca Store Metro</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .navbar-pink .navbar-brand,
+        .navbar-pink .navbar-link {
+            color: #ffffff !important;
+        }
+
+        .navbar-brand {
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        .navbar-pink .navbar-link:hover {
+            color: #ffede1 !important;
+        }
+    </style>
+
+</head>
+
+<body>
+    <!-- 1. NAVBAR -->
+    <nav class="navbar navbar-expand-lg bg-white border-bottom sticky-top">
+        <div class="container">
+
+            <img src="gambar/logo.jpg" alt="Logo Langgas Sinau" width="45" height="45" class="border-radius-100 me-2 ">
+
+            <a class="navbar-brand fw-bold" href="#">
+                Talyca Store
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarContent">
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="index.html#">Beranda</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#produk">Produk</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#vidio">Vidio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#tentang">Tentang kami</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#kontak">Kontak</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#lokasi">Lokasi</a></li>
+                </ul>
+                <li id="auth-menu"></li>
+            </div>
+        </div>
+    </nav>
+
+
+
+
+    <main class="section dashboard alert alert-success">
+        <h1 id="judul">Akun Saya</h1>
+        <p class="subtitle" id="sapa"></p>
+        <div class="kontak-grid">
+            <div class="kontak-box alert alert-primary">
+                <h3>Nama</h3>
+                <p id="dNama"></p>
+            </div>
+            <div class="kontak-box alert alert-primary">
+                <h3>Username</h3>
+                <p id="dUser"></p>
+            </div>
+            <div class="kontak-box alert alert-primary">
+                <h3>Peran</h3>
+                <p id="dRole"></p>
+            </div>
+        </div>
+        <!-- Hanya tampil untuk Admin -->
+        <section id="panelAdmin" class="panel" hidden>
+            <h2>Daftar Pesanan Masuk (contoh)</h2>
+            <div class="table-wrap">
+                <table class="tabel">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Pemesanan</th>
+                            <th>Produk</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>David</td>
+                            <td>Lamborghini eventador</td>
+                            <td>Diproses</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>Munir</td>
+                            <td>Baju Batman</td>
+                            <td>Ngutang</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>Dino</td>
+                            <td>Baju Spiderman</td>
+                            <td> Selesai</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        <section id="panelUser" class="panel" hidden>
+            <h2>Pesanan Saya</h2>
+            <p>Belum ada pesanan. Yuk lihat <a href="index.html#produk" class="link">produk kami</a>.</p>
+        </section>
+    </main>
+    <footer class="footer">
+        <p>&copy; 2026 Talyca Store. Website sampel latihan PKL, bukan website resmi.</p>
+    </footer>
+    <script src="js/auth.js"></script>
+    <script>
+        requireLogin(); // wajib login, kalau tidak ke login.html
+        const user = getUser();
+        if (user) {
+            document.getElementById("sapa").textContent = "Selamat datang, " + user.nama + "!";
+            document.getElementById("dNama").textContent = user.nama;
+            document.getElementById("dUser").textContent = user.username;
+            document.getElementById("dRole").textContent = user.role;
+            // Tampilan berbeda sesuai peran
+            document.getElementById(user.role === "Admin" ? "panelAdmin" : "panelUser").hidden = false;
+        }
+    </script>
+</body>
+
+</html>
